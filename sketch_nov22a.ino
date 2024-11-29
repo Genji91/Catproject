@@ -2,13 +2,17 @@
 #include <PCM.h> // include PCM library to decode mp3 file into PCM audio
 #include <Adafruit_NeoPixel.h> // include neopixel library for neopixel light
 
-// #define PIN (put number here) // input pin of the neopixel
-#define NUMPIXELS 1 // number of neopixels in the strip
+
+// Define which PWM input pin the neopixel is connected to
+#define PIN 6
+//Number of neopixels in the strip (only one for now)
+#define NUMPIXELS 1
 
 
 
-Servo servo1; // Create the first servo object
-Servo servo2; // Create the second servo object
+
+PWMServo servo1; // Create the first servo object
+PWMServo servo2; // Create the second servo object
 
 
 
@@ -17,7 +21,8 @@ bool increasing = true; // Direction of servo movement
 unsigned long previousServoMillis = 0; // To track servo timing
 const long servoInterval = 15; // Time between servo position updates (15 ms)
 
-pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800); //
+// neopixe object
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 
 int colourDelay = 100; // colour display delay for neopixel
@@ -121,7 +126,11 @@ void loop() {
 
   // call the speaker function to initialize mp3 sound playback
   // call the neopixel function to set and change color continuously
-  // call servo functoin here 
+  // call servo functoin here
+
+  neoPixel();
+  servoMotors();
+  
   
 }
 
